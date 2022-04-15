@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 02:38:40 by hmoon             #+#    #+#             */
-/*   Updated: 2022/01/17 16:55:45 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	if (!s || !f)
 		return (NULL);
-	ret = (char *)malloc((sizeof(char) * ft_strlen(s) + 1));
-	if (!ret)
-		return (NULL);
+	ret = ft_malloc((sizeof(char) * ft_strlen(s) + 1));
 	while (s[i])
 	{
 		ret[i] = f(i, s[i]);

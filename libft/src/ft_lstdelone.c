@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 05:02:46 by hmoon             #+#    #+#             */
-/*   Updated: 2021/06/03 05:04:33 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	if (lst)
 	{
 		del(lst->content);
-		free(lst);
+		ft_free(lst);
 	}
 }

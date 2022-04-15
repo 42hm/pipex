@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freearr.c                                       :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 00:11:08 by hmoon             #+#    #+#             */
-/*   Updated: 2022/03/23 00:17:53 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-void	ft_freearr(char *arr)
+void	ft_free(void *src)
 {
-	free(arr);
-	arr = NULL;
+	free(src);
+	src = NULL;
 }

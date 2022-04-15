@@ -6,11 +6,12 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 02:50:30 by hmoon             #+#    #+#             */
-/*   Updated: 2022/01/17 16:52:42 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
 static	void	ft_putnbr(unsigned int nbr, int fd)
 {

@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 23:59:16 by hmoon             #+#    #+#             */
-/*   Updated: 2022/01/17 16:46:57 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ char	*ft_itoa(int n)
 	else
 		num = -n;
 	count = count_num(n);
-	ret = (char *)malloc(sizeof(char) * (count + 1));
-	if (!ret)
-		return (NULL);
+	ret = ft_malloc(sizeof(char) * (count + 1));
 	ret[count] = '\0';
 	while (count > 0)
 	{

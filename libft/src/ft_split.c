@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 23:18:14 by hmoon             #+#    #+#             */
-/*   Updated: 2022/03/20 18:36:21 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,10 @@ static	char	**split_free(char **ret)
 	i = 0;
 	while (ret[i] != 0)
 	{
-		free(ret[i]);
-		ret[i] = NULL;
+		ft_free(ret[i]);
 		i++;
 	}
-	free(ret);
-	ret = NULL;
+	ft_free(ret);
 	return (NULL);
 }
 
@@ -58,9 +56,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	ret = (char **)malloc(sizeof(char *) * (cset(s, c, &count) + 1));
-	if (!ret)
-		return (NULL);
+	ret = ft_malloc(sizeof(char *) * (cset(s, c, &count) + 1));
 	index = 0;
 	while (index < count)
 	{

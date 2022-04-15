@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 00:50:10 by hmoon             #+#    #+#              #
-#    Updated: 2022/04/02 03:12:33 by hmoon            ###   ########.fr        #
+#    Updated: 2022/04/15 14:30:35 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC_FILE	:=	ft_atoi.c \
 			ft_lstadd_back.c ft_lstdelone.c \
 			ft_lstclear.c ft_lstiter.c \
 			ft_lstmap.c ft_strcmp.c \
-			ft_freearr.c get_next_line.c
+			ft_free.c get_next_line.c \
+			ft_malloc.c
 OBJ_FILE	:=	$(SRC_FILE:.c=.o)
 SRC			:=	$(addprefix $(SRC_DIR), $(SRC_FILE))
 OBJ			:=	$(addprefix $(OBJ_DIR), $(OBJ_FILE))

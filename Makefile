@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 22:37:29 by hmoon             #+#    #+#              #
-#    Updated: 2022/04/02 03:12:34 by hmoon            ###   ########.fr        #
+#    Updated: 2022/04/15 11:14:49 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ HEADER_BONUS	:=	./bonus/include/
 SRC_DIR_B		:=	./bonus/src/
 OBJ_DIR_B		:=	./bonus/obj/
 
-SRC_FILES		:=	$(addsuffix .c, )
+SRC_FILES		:=	$(addsuffix .c, pipex)
 OBJ_FILES		:=	$(SRC_FILES:.c=.o)
 SRC				:=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ				:=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))

@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/28 20:49:37 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/15 10:57:35 by hmoon             #+#    #+#             */
+/*   Updated: 2022/04/15 15:18:04 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PIPEX_H
+# define PIPEX_H
 
-char	*ft_strdup(const char *s1)
+# include "../libft/include/libft.h"
+
+typedef struct s_exec
 {
-	char		*temp;
-	size_t		i;
+	char			*data;
+	struct	s_exec	*next;
+}				t_exec;
 
-	i = 0;
-	temp = ft_malloc((ft_strlen(s1) + 1) * sizeof(char));
-	while (s1[i] != '\0')
-	{
-		temp[i] = s1[i];
-		i++;
-	}
-	temp[i] = '\0';
-	return (temp);
-}
+typedef struct s_pid
+{
+	pid_t			data;
+	struct	s_pid	*next;
+}				t_pid;
+
+# endif

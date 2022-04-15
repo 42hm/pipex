@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/28 20:49:37 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/15 10:57:44 by hmoon             #+#    #+#             */
+/*   Updated: 2022/04/15 11:40:32 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-char	*ft_strdup(const char *s1)
+int	main(int argc, char **argv, char **envp)
 {
-	char		*temp;
-	size_t		i;
+	if (argc < 5)
+		return (1);
 
-	i = 0;
-	temp = ft_malloc((ft_strlen(s1) + 1) * sizeof(char));
-	while (s1[i] != '\0')
-	{
-		temp[i] = s1[i];
-		i++;
-	}
-	temp[i] = '\0';
-	return (temp);
 }

@@ -6,12 +6,11 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 10:19:58 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 15:16:32 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/15 15:47:43 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <unistd.h>
+#include "../include/libft.h"
 
 static int	read_buff(int fd, char **save)
 {
@@ -51,7 +50,7 @@ static void	division(char **save, char **line, int ret)
 	}
 	else if (ret > 0)
 	{
-		while ((*save[i] != '\n'))
+		while ((*save)[i] != '\n')
 			i++;
 		output = ft_substr(*save, 0, i);
 		*line = output;

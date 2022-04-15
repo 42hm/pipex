@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 10:57:35 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 15:18:04 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/15 15:19:55 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include "../libft/include/libft.h"
+# include <unistd.h>
 
 typedef struct s_exec
 {

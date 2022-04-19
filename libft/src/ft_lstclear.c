@@ -6,11 +6,12 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 05:04:51 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/19 17:38:52 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
@@ -23,7 +24,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 			del((*lst)->content);
 			tmp = *lst;
 			*lst = (*lst)->next;
-			ft_free(tmp);
+			free(tmp);
+			tmp = NULL;
 		}
 	}
 	*lst = NULL;

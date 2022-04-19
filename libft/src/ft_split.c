@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 23:18:14 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/19 17:41:15 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ static	char	**split_free(char **ret)
 	i = 0;
 	while (ret[i] != 0)
 	{
-		ft_free(ret[i]);
+		free(ret[i]);
+		ret[i] = NULL;
 		i++;
 	}
-	ft_free(ret);
+	free(ret);
+	ret = NULL;
 	return (NULL);
 }
 

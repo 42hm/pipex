@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 10:57:44 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/29 00:57:22 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/29 00:58:50 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	path_parse(char *cmd, char *path, char **envp)
 {
-	char	*temp_path;
+	char	**temp_path;
 	char	*temp;
 	size_t	index;
 
@@ -33,11 +33,12 @@ static void	path_parse(char *cmd, char *path, char **envp)
 		path = ft_strjoin(temp_path[index], temp);
 		free(temp);
 		if (access(path, X_OK) == 0)
-			return ;
-		i++;
+			break;
+		index++;
 		free(path);
 		path = NULL;
 	}
+	return ;
 }
 
 static void	command_excute(char *argv, char **envp)
@@ -48,7 +49,7 @@ static void	command_excute(char *argv, char **envp)
 	cmd = ft_split(argv, ' ');
 	if (cmd == 0)
 		ft_perror_exit("Argv parse error", EXIT_FAILURE);
-	path = path_parse(cmd[0], path, envp);
+	path_parse(cmd[0], path, envp);
 	if (path == 0)
 		ft_perror_exit("Error", EXIT_NOT_COMMAND);
 	if (execve(path, cmd, envp) == -1)

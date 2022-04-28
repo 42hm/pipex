@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_perror_exit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/03 03:42:44 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/28 17:15:06 by hmoon             #+#    #+#             */
+/*   Updated: 2022/04/28 17:43:00 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
+#include <errno.h>
+#include <stdlib.h>
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_perror_exit(const char *str, unsigned int exit_status)
 {
-	new->next = *lst;
-	*lst = new;
+	ft_perror(str, errno);
+	exit(exit_status);
 }

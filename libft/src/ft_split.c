@@ -6,11 +6,12 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 23:18:14 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/19 17:41:15 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/28 17:16:56 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
+#include <stdlib.h>
 
 static	size_t	cset(char const *s, char c, size_t *count)
 {

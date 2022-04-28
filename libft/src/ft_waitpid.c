@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_waitpid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/03 05:04:51 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/19 17:38:52 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/28 16:43:32 by hmoon             #+#    #+#             */
+/*   Updated: 2022/04/28 17:16:56 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "../include/libft.h"
+#include <errno.h>
+#include <sys/wait.h>
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+pid_t	ft_waitpid(pid_t pid, int *status, int option)
 {
-	t_list	*tmp;
+	pid_t	ret;
 
-	if (lst && *lst)
+	ret = waitpid(pid, status, option);
+	if (ret == -1)
 	{
-		while (*lst)
-		{
-			del((*lst)->content);
-			tmp = *lst;
-			*lst = (*lst)->next;
-			free(tmp);
-			tmp = NULL;
-		}
+		ft_perror("waitpid", errno);
+		return (0);
 	}
-	*lst = NULL;
+	return (ret);
 }

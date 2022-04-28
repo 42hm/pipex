@@ -6,14 +6,14 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 18:50:49 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 15:47:25 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/28 17:41:05 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stddef.h>
+# include <unistd.h>
 
 typedef struct s_list
 {
@@ -62,23 +62,25 @@ char				**ft_split(char const *s, char c);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 void				ft_putchar_fd(char c, int fd);
-void				ft_putstr_fd(char *s, int fd);
+void				ft_putstr_fd(const char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
-t_list				*ft_lstnew(void *content);
-void				ft_lstadd_front(t_list **lst, t_list *new);
-int					ft_lstsize(t_list *lst);
-t_list				*ft_lstlast(t_list *lst);
-void				ft_lstadd_back(t_list **lst, t_list *new);
-void				ft_lstdelone(t_list *lst, void (*del)(void*));
-void				ft_lstclear(t_list **lst, void (*del)(void*));
-void				ft_lstiter(t_list *lst, void (*f)(void *));
-t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
-						void (*del)(void *));
-
-void				ft_free(void *arr);
+void				ft_free(void **src);
 void				*ft_malloc(size_t size);
 int					get_next_line(int fd, char **line);
+
+void				ft_close(int fd);
+int					ft_dup(int fd);
+int					ft_dup2(int fd1, int fd2);
+pid_t				ft_fork(void);
+void				ft_perror(const char *data, int errno);
+int					ft_pipe(int pipefd[2]);
+pid_t				ft_waitpid(pid_t pid, int *status, int option);
+int					ft_wexitstatus(int status);
+int					ft_wifexited(int status);
+int					ft_wifsignaled(int stauts);
+int					ft_wifstopped(int status);
+void				ft_perror_exit(const char *str, unsigned int exit_status);
 
 #endif

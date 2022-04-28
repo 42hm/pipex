@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_wifexited.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/03 03:31:11 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/28 16:44:22 by hmoon             #+#    #+#             */
+/*   Updated: 2022/04/28 17:16:56 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_wifexited(int status)
 {
-	t_list	*ret;
-
-	ret = ft_malloc(sizeof(t_list));
-	ret->content = content;
-	ret->next = NULL;
-	return (ret);
+	return ((status & 0177) == 0);
 }

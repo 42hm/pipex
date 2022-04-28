@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_wexitstatus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/03 03:49:59 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/28 16:43:42 by hmoon             #+#    #+#             */
+/*   Updated: 2022/04/28 17:16:56 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int	ft_wexitstatus(int status)
 {
-	t_list	*curr;
-	int		count;
-
-	count = ft_lstsize(lst);
-	curr = lst;
-	while (count > 1)
-	{
-		curr = curr->next;
-		count--;
-	}
-	return (curr);
+	return ((status >> 8) & 0x000000ff);
 }

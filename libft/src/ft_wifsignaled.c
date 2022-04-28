@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_wifsignaled.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/03 03:47:22 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/28 16:44:35 by hmoon             #+#    #+#             */
+/*   Updated: 2022/04/28 17:16:56 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
-int	ft_lstsize(t_list *lst)
+int	ft_wifsignaled(int status)
 {
-	t_list	*curr;
-	int		count;
-
-	count = 0;
-	curr = lst;
-	while (curr)
-	{
-		curr = curr->next;
-		count++;
-	}
-	return (count);
+	return (((status & 0177) != 0177) && ((status & 0177) != 0));
 }

@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_dup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/28 20:49:37 by hmoon             #+#    #+#             */
+/*   Created: 2022/04/28 16:41:17 by hmoon             #+#    #+#             */
 /*   Updated: 2022/04/28 17:16:56 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
+#include <errno.h>
 
-char	*ft_strdup(const char *s1)
+int	ft_dup(int fd)
 {
-	char		*temp;
-	size_t		i;
+	int	ret;
 
-	i = 0;
-	temp = ft_malloc((ft_strlen(s1) + 1) * sizeof(char));
-	while (s1[i] != '\0')
+	ret = dup(fd);
+	if (ret < 0)
 	{
-		temp[i] = s1[i];
-		i++;
+		ft_perror("dup", errno);
+		return (-1);
 	}
-	temp[i] = '\0';
-	return (temp);
+	return (ret);
 }

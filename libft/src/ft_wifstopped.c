@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_wifstopped.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/03 05:02:46 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/19 17:39:12 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/28 16:44:42 by hmoon             #+#    #+#             */
+/*   Updated: 2022/04/28 17:16:56 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "../include/libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+int	ft_wifstopped(int status)
 {
-	if (lst)
-	{
-		del(lst->content);
-		free(lst);
-	}
+	return (((status & 0177) == 0177) && ((status >> 8) != 0x13));
 }

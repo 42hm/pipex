@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 22:37:29 by hmoon             #+#    #+#              #
-#    Updated: 2022/04/15 11:14:49 by hmoon            ###   ########.fr        #
+#    Updated: 2022/04/29 00:57:12 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ endif
 all		:	$(LIBFT) $(OBJ_FOLDER) $(NAME)
 
 $(NAME)	:	$(OBJS)
-	@$(CC) $(CFLAGS) $(LIBFT_LIB) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LIBFT) $(OBJS) -o $(NAME)
 	@echo "\033[01;32m       SUCCESS!      \033[0m"
 
 $(OBJ_FOLDER)	:
@@ -85,7 +85,7 @@ clean	:
 fclean	:	clean
 	@make -C ./libft fclean
 	@$(RM) $(NAME)
-	@echo "\033[91m       FCLEAN DONE      \033[0m"
+	@echo "\033[91m      FCLEAN DONE      \033[0m"
 
 .PHONY	:	re
 re		:	fclean all

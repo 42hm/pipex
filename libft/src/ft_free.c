@@ -6,11 +6,11 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 00:11:08 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/19 17:27:53 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/28 17:16:56 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 #include <stdlib.h>
 
 void	ft_free(void **src)

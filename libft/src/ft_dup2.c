@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_dup2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/03 05:09:55 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/28 16:41:29 by hmoon             #+#    #+#             */
+/*   Updated: 2022/04/28 20:27:48 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
+#include <errno.h>
+#include <stdlib.h>
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+int	ft_dup2(int fd1, int fd2)
 {
-	if (lst && f)
+	if (fd1 == fd2)
+		return (1);
+	if (dup2(fd1, fd2) == -1)
 	{
-		while (lst)
-		{
-			f(lst->content);
-			lst = lst->next;
-		}
+		ft_perror("dup2", errno);
+		exit(EXIT_FAILURE);
 	}
+	return (1);
 }

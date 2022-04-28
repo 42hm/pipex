@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/03 04:01:55 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/15 14:52:28 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/28 16:43:19 by hmoon             #+#    #+#             */
+/*   Updated: 2022/04/28 17:16:56 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
+#include <errno.h>
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	ft_pipe(int pipefd[2])
 {
-	t_list	*ret;
-
-	if (!*lst)
-		*lst = new;
-	else
+	if (pipe(pipefd) == -1)
 	{
-		ret = *lst;
-		while (ret->next)
-			ret = ret->next;
-		ret->next = new;
+		ft_perror("pipe", errno);
+		return (0);
 	}
+	return (1);
 }

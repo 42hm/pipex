@@ -6,13 +6,13 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 22:37:29 by hmoon             #+#    #+#              #
-#    Updated: 2022/04/29 00:57:12 by hmoon            ###   ########.fr        #
+#    Updated: 2022/04/29 01:03:18 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			:=	pipex
 CC				:=	cc
-CFLAGS			:=	-Wall -Wextra -Werror
+CFLAGS			:=	-Wall -Wextra -Werror -g
 RM				:=	rm -rf
 
 LIBFT			:=	./libft/libft.a

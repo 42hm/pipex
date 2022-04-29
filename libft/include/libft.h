@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 18:50:49 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/28 17:41:05 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/29 07:16:20 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int					ft_wexitstatus(int status);
 int					ft_wifexited(int status);
 int					ft_wifsignaled(int stauts);
 int					ft_wifstopped(int status);
+int					ft_wtermsig(int status);
 void				ft_perror_exit(const char *str, unsigned int exit_status);
 
 #endif

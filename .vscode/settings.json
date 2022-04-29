@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"*.html": "html",
-		"libft.h": "c"
+		"libft.h": "c",
+		"errno.h": "c"
 	}
 }

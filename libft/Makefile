@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 00:50:10 by hmoon             #+#    #+#              #
-#    Updated: 2022/04/28 17:42:26 by hmoon            ###   ########.fr        #
+#    Updated: 2022/04/29 07:16:04 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRC_FILE	:=	ft_atoi.c \
 			ft_pipe.c ft_perror.c \
 			ft_waitpid.c ft_wifexited.c \
 			ft_wifsignaled.c ft_wifstopped.c \
-			ft_wexitstatus.c
+			ft_wexitstatus.c ft_wtermsig.c
 
 OBJ_FILE	:=	$(SRC_FILE:.c=.o)
 SRC			:=	$(addprefix $(SRC_DIR), $(SRC_FILE))

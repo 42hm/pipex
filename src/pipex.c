@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 10:57:44 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/29 10:53:06 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/29 12:57:27 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,13 @@ static char **get_path(char **envp)
 	size_t	index;
 
 	index = 0;
+	if (!(*envp))
+		return (0);
+		// putstr_error("Error : No Path\n", NULL, EXIT_);
 	while (*envp && (ft_strnstr(envp[index], "PATH", 4) == 0))
 		++index;
-	if (!(*envp))
-		putstr_error("Error : No Path\n", NULL, 127);
+	if (envp[index] == 0)
+		return (0);
 	return (ft_split(envp[index] + 5, ':'));
 }
 
@@ -65,9 +68,6 @@ static char	*cmd_parse(char *cmd, char **paths)
 	size_t	index;
 
 	index = -1;
-	err = access(cmd, X_OK);
-	if (err == 0)
-		return (cmd);
 	temp = ft_strjoin("/", cmd);
 	while (paths[++index] != 0)
 	{
@@ -81,6 +81,9 @@ static char	*cmd_parse(char *cmd, char **paths)
 		free(path);
 	}
 	free(temp);
+	err = access(cmd, X_OK);
+	if (err == 0)
+		return (cmd);
 	putstr_error("Error: command not found: ", cmd, EXIT_NOT_COMMAND);
 	return (NULL);
 }
@@ -95,8 +98,8 @@ static void	command_excute(char *argv, char **envp)
 	if (cmd == 0)
 		putstr_error("Error: Bad cmd split\n", NULL, EXIT_FAILURE);
 	paths = get_path(envp);
-	if (paths == 0)
-		putstr_error("Error: Bad path split\n", NULL, EXIT_FAILURE);
+	if (paths == 0 && access(cmd[0], X_OK) == -1)
+		putstr_error("Error: command not found: ", cmd[0], EXIT_NOT_COMMAND);
 	path = cmd_parse(cmd[0], paths);
 	if (execve(path, cmd, envp) == -1)
 		exit(EXIT_NOT_EXECUTE);
@@ -105,10 +108,10 @@ static void	command_excute(char *argv, char **envp)
 static void parent_process(pid_t pid, int fd[2], char **argv, char **envp)
 {
 	int	outfile;
-	// int	status;
+	int	status;
 
 	ft_close(fd[1]);
-	ft_waitpid(pid, NULL, 0);
+	ft_waitpid(pid, &status, 0);
 	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (outfile == -1)
 		// ft_perror_exit("Error", EXIT_FAILURE);

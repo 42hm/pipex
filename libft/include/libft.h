@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 18:50:49 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/29 07:16:20 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/30 10:52:05 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define LIBFT_H
 
 # include <unistd.h>
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
 
 # define OPEN_MAX 256
 # define BUFFER_SIZE 1024
@@ -83,5 +77,6 @@ int					ft_wifsignaled(int stauts);
 int					ft_wifstopped(int status);
 int					ft_wtermsig(int status);
 void				ft_perror_exit(const char *str, unsigned int exit_status);
+int					ft_open(const char *file, int mode);
 
 #endif

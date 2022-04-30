@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/15 10:57:44 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/30 15:18:34 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/30 09:10:11 by hmoon             #+#    #+#             */
+/*   Updated: 2022/04/30 23:17:30 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../include/pipex_bonus.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -88,6 +88,7 @@ static char	*cmd_parse(char *cmd, char **paths)
 	return (NULL);
 }
 
+
 static void	command_excute(char *argv, char **envp)
 {
 	char	**cmd;
@@ -105,48 +106,113 @@ static void	command_excute(char *argv, char **envp)
 		exit(EXIT_NOT_EXECUTE);
 }
 
-static void parent_process(pid_t pid, int fd[2], char **argv, char **envp)
-{
-	int	outfile;
-	int	status;
+// static void	move_next_pipe(t_pipe *pipe)
+// {
+// 	if (pipe->prev[0] == -1)
+// 		ft_close(pipe->prev[0]);
+// 	if (pipe->prev[1] == -1)
+// 		ft_close(pipe->prev[1]);
+// 	pipe->prev[0] = pipe->curr[0];
+// 	pipe->prev[1] = pipe->curr[1];
+// 	ft_pipe(pipe->curr);
+// }
 
-	ft_close(fd[1]);
-	ft_waitpid(pid, &status, 0);
-	outfile = open(argv[4], WRITE);
-	ft_dup2(fd[0], STDIN_FILENO);
-	ft_dup2(outfile, STDOUT_FILENO);
-	ft_close(fd[0]);
-	ft_close(outfile);
-	command_excute(argv[3], envp);
+static void	child_process(t_pipe *pipe, t_info *info, char *argv, char **envp)
+{
+	ft_pipe(pipe->prev);
+	info->pid = ft_fork();
+	if (info->pid == 0)
+	{
+		ft_close(pipe->prev[0]);
+		ft_dup2(pipe->prev[1], STDOUT_FILENO);
+		ft_close(pipe->prev[1]);
+		command_excute(argv, envp);
+	}
 }
 
-static void	child_process(int fd[2], char **argv, char **envp)
+static void	parent_process(t_pipe *pipe, t_info *info)
 {
-	int		infile;
+	// int	status;
 
-	ft_close(fd[0]);
-	infile = ft_open(argv[1], READ);
-	ft_dup2(infile, STDIN_FILENO);
-	ft_close(infile);
-	ft_dup2(fd[1], STDOUT_FILENO);
-	ft_close(fd[1]);
-	command_excute(argv[2], envp);
+	ft_close(pipe->prev[1]);
+	ft_waitpid(info->pid, 0, 0);
+	ft_dup2(pipe->prev[0], STDIN_FILENO);
+	ft_close(pipe->prev[0]);
+	// status = get_exit_status(status);
+	// if (status)
+
+}
+
+static void	here_doc(t_info *info, char *limiter)
+{
+	char *line;
+
+	ft_putstr_fd("pipe heredoc>", info->infile);
+	while (get_next_line(STDIN_FILENO, &line))
+	{
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+		{
+			free(line);
+			break;
+		}
+		ft_putstr_fd("pipe heredoc>", info->infile);
+		ft_putstr_fd(line, info->infile);
+		free(line);
+	}
+	ft_close(info->infile);
+	info->infile = ft_open("temp", READ);
+}
+
+static void	initialize(t_pipe *pipe, t_info *info, char *argv)
+{
+	pipe->prev[0] = -1;
+	pipe->prev[1] = -1;
+	pipe->curr[0] = -1;
+	pipe->curr[1] = -1;
+	info->heredoc = -1;
+	info->infile = -1;
+	info->outfile = -1;
+	ft_pipe(pipe->prev);
+	ft_pipe(pipe->curr);
+	if (ft_strncmp(argv, "here_doc", 8) == 0)
+		info->heredoc = 1;
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	int		fd[2];
-	pid_t	pid;
+	t_pipe	pipe;
+	t_info	info;
+	int		index;
 
-	if (argc != 5)
+	index = 1;
+
+	if (argc < 5)
 		putstr_error("Error: Bad argument\n", NULL, EXIT_FAILURE);
-	//while4
-	ft_pipe(fd);
-	pid = ft_fork();
-	if (pid == 0)
-		child_process(fd, argv, envp);
+	initialize(&pipe, &info, argv[index]);
+	if (info.heredoc != 1)
+	{
+		info.infile = ft_open(argv[index++], READ);
+		info.outfile = ft_open(argv[argc - 1], WRITE);
+	}
 	else
-		parent_process(pid, fd, argv, envp);
-	//
+	{
+		info.infile = ft_open("temp", WRITE);
+		info.outfile = ft_open(argv[argc - 1], APPEND);
+		here_doc(&info, argv[++index]);
+	}
+	ft_dup2(info.infile, STDIN_FILENO);
+	ft_close(info.infile);
+	while (index++ < argc - 2)
+	{
+		child_process(&pipe, &info, argv[index], envp);
+	}
+	index = 3;
+	while (index++ < argc - 2)
+		parent_process(&pipe, &info);
+	ft_dup2(info.outfile, STDOUT_FILENO);
+	ft_close(info.outfile);
+	if (access("temp", F_OK) == 0)
+		unlink("temp");
+	command_excute(argv[argc - 2], envp);
 	return (0);
 }

@@ -6,11 +6,12 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 10:19:58 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/19 17:40:55 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/04/30 11:22:08 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
+#include <stdlib.h>
 
 static int	read_buff(int fd, char **save)
 {

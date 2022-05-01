@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 10:12:43 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/30 23:07:24 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/05/01 14:24:27 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@
 
 enum e_exit_status
 {
-	STOP_SIGNAL = 17,
-	CONTINUE_SIGNAL = 19,
 	EXIT_NOT_EXECUTE = 126,
 	EXIT_NOT_COMMAND = 127,
 	EXIT_SIGNAL = 128
+};
+
+enum e_bool
+{
+	FALSE = -1,
+	TRUE = 1
 };
 
 enum e_mode
@@ -33,23 +37,16 @@ enum e_mode
 
 typedef struct s_info
 {
-	int		heredoc;
 	pid_t	pid;
+	int		index;
+	int		heredoc;
 	int		infile;
 	int		outfile;
+	int		pipe[2];
 }			t_info;
 
-typedef struct s_pipe
-{
-	int	prev[2];
-	int	curr[2];
-}			t_pipe;
-
-// typedef struct s_cmd
-// {
-// 	char	*cmd;
-// 	size_t	len;
-// 	size_t	size;
-// }			t_cmd;
+void	make_process(t_info *info, char *str, char **ev);
+void	command_excute(char *str, char **ev);
+void	putstr_error(char *str, char *target, int exit_status);
 
 #endif

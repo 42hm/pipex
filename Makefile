@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 22:37:29 by hmoon             #+#    #+#              #
-#    Updated: 2022/04/30 11:18:58 by hmoon            ###   ########.fr        #
+#    Updated: 2022/05/01 14:09:43 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ OBJ_FILES		:=	$(SRC_FILES:.c=.o)
 SRC				:=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ				:=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
-SRC_FILES_B		:=	$(addsuffix .c, pipex_bonus)
+SRC_FILES_B		:=	$(addsuffix .c, pipex_bonus pipex_util_bonus)
 OBJ_FILES_B		:=	$(SRC_FILES_B:.c=.o)
 SRC_BONUS		:=	$(addprefix $(SRC_DIR_B), $(SRC_FILES_B))
 OBJ_BONUS		:=	$(addprefix $(OBJ_DIR_B), $(OBJ_FILES_B))

@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 10:32:58 by hmoon             #+#    #+#             */
-/*   Updated: 2022/04/30 21:32:40 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/05/01 14:20:02 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ static void	putstr_error(const char *str, const char *argv, int exit_status)
 		ft_putstr_fd(argv, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
-	exit(exit_status);
 }
 
-int	4ft_open(const char *file, int mode)
+int	ft_open(const char *file, int mode)
 {
 	int	fd;
 
@@ -41,7 +40,7 @@ int	4ft_open(const char *file, int mode)
 		fd = open(file, O_RDONLY);
 	else if (mode == 1)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (mode == 2)
+	else
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 		putstr_error("Error", file, 1);

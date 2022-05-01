@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 09:10:11 by hmoon             #+#    #+#             */
-/*   Updated: 2022/05/01 14:56:21 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/05/01 17:31:51 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	close_out(t_info *info)
 
 static void	here_doc(t_info *info, char *limiter)
 {
-	char *line;
+	char	*line;
 
 	write(STDOUT_FILENO, "> ", 14);
 	while (get_next_line(STDIN_FILENO, &line))
@@ -37,7 +37,7 @@ static void	here_doc(t_info *info, char *limiter)
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 		{
 			free(line);
-			break;
+			break ;
 		}
 		write(STDOUT_FILENO, "> ", 14);
 		write(info->infile, line, ft_strlen(line));
@@ -61,11 +61,11 @@ static void	open_in_out(t_info *info, int i, char **str)
 		info->infile = ft_open("temp", WRITE);
 		here_doc(info, str[++info->index]);
 	}
-	// if (info->infile != -1)
-	// {
-	// 	ft_dup2(info->infile, STDIN_FILENO);
-	// 	ft_close(info->infile);
-	// }
+	if (info->infile != -1)
+	{
+		ft_dup2(info->infile, STDIN_FILENO);
+		ft_close(info->infile);
+	}
 }
 
 static void	init_info(t_info *info, char *str)
@@ -81,7 +81,6 @@ static void	init_info(t_info *info, char *str)
 		info->heredoc = FALSE;
 }
 
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	info;
@@ -93,6 +92,8 @@ int	main(int argc, char **argv, char **envp)
 	while (++info.index < argc - 2)
 		make_process(&info, argv[info.index], envp);
 	close_out(&info);
+	while (1)
+		;
 	command_excute(argv[argc - 2], envp);
 	return (0);
 }

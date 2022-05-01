@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 14:05:58 by hmoon             #+#    #+#             */
-/*   Updated: 2022/05/01 15:08:01 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/05/01 17:24:45 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,6 @@ void	make_process(t_info *info, char *str, char **ev)
 	info->pid = ft_fork();
 	if (info->pid == 0)
 	{
-	// 	if (info->infile == -1 && info->index == 4)
-	// 	{
-	// 		ft_dup2(info->pipe[0], STDIN_FILENO);
-	// 		ft_close(info->pipe[0]);
-	// 	}
-		// ft_dup2(info->pipe[0], STDIN_FILENO);
 		ft_close(info->pipe[0]);
 		ft_dup2(info->pipe[1], STDOUT_FILENO);
 		ft_close(info->pipe[1]);

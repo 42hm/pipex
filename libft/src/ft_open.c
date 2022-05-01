@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 10:32:58 by hmoon             #+#    #+#             */
-/*   Updated: 2022/05/01 14:20:02 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/05/01 17:25:05 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	putstr_error(const char *str, const char *argv, int exit_status)
 		ft_putstr_fd(argv, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
+	exit(exit_status);
 }
 
 int	ft_open(const char *file, int mode)

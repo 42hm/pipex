@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_util_bonus.c                                 :+:      :+:    :+:   */
+/*   pipex_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 14:05:58 by hmoon             #+#    #+#             */
-/*   Updated: 2022/05/04 07:09:50 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/05/04 07:08:56 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_bonus.h"
+#include "../include/pipex.h"
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>

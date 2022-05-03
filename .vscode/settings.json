@@ -3,6 +3,7 @@
 		"*.html": "html",
 		"libft.h": "c",
 		"errno.h": "c",
-		"locale": "c"
+		"locale": "c",
+		"sstream": "c"
 	}
 }

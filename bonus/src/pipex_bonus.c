@@ -6,7 +6,7 @@
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 09:10:11 by hmoon             #+#    #+#             */
-/*   Updated: 2022/05/01 17:31:51 by hmoon            ###   ########.fr       */
+/*   Updated: 2022/05/04 07:13:50 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	here_doc(t_info *info, char *limiter)
 {
 	char	*line;
 
-	write(STDOUT_FILENO, "> ", 14);
+	write(STDOUT_FILENO, "> ", 2);
 	while (get_next_line(STDIN_FILENO, &line))
 	{
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
@@ -39,7 +39,7 @@ static void	here_doc(t_info *info, char *limiter)
 			free(line);
 			break ;
 		}
-		write(STDOUT_FILENO, "> ", 14);
+		write(STDOUT_FILENO, "> ", 2);
 		write(info->infile, line, ft_strlen(line));
 		write(info->infile, "\n", 1);
 		free(line);
@@ -48,18 +48,18 @@ static void	here_doc(t_info *info, char *limiter)
 	info->infile = ft_open("temp", READ);
 }
 
-static void	open_in_out(t_info *info, int i, char **str)
+static void	open_in_out(t_info *info, int ac, char **av)
 {
 	if (info->heredoc == FALSE)
 	{
-		info->outfile = ft_open(str[i - 1], WRITE);
-		info->infile = ft_open(str[info->index], READ);
+		info->outfile = ft_open(av[ac - 1], WRITE);
+		info->infile = ft_open(av[info->index], READ);
 	}
 	else
 	{
-		info->outfile = ft_open(str[i - 1], APPEND);
+		info->outfile = ft_open(av[ac - 1], APPEND);
 		info->infile = ft_open("temp", WRITE);
-		here_doc(info, str[++info->index]);
+		here_doc(info, av[++info->index]);
 	}
 	if (info->infile != -1)
 	{
@@ -68,14 +68,14 @@ static void	open_in_out(t_info *info, int i, char **str)
 	}
 }
 
-static void	init_info(t_info *info, char *str)
+static void	init_info(t_info *info, char *av)
 {
 	info->index = 1;
 	info->infile = -1;
 	info->outfile = -1;
 	info->pipe[0] = -1;
 	info->pipe[1] = -1;
-	if (ft_strncmp(str, "here_doc", 8) == 0)
+	if (ft_strncmp(av, "here_doc", 8) == 0)
 		info->heredoc = TRUE;
 	else
 		info->heredoc = FALSE;
@@ -92,8 +92,6 @@ int	main(int argc, char **argv, char **envp)
 	while (++info.index < argc - 2)
 		make_process(&info, argv[info.index], envp);
 	close_out(&info);
-	while (1)
-		;
 	command_excute(argv[argc - 2], envp);
 	return (0);
 }

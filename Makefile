@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 22:37:29 by hmoon             #+#    #+#              #
-#    Updated: 2022/05/01 14:09:43 by hmoon            ###   ########.fr        #
+#    Updated: 2022/05/04 07:04:06 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ LIBFT_HEADER	:=	./libft/include/
 
 HEADER			:=	./include/
 SRC_DIR			:=	./src/
-OBJ_DIR			:=	./obj/
+OBJ_DIR			:=	./.obj/
 
 HEADER_BONUS	:=	./bonus/include/
 SRC_DIR_B		:=	./bonus/src/
-OBJ_DIR_B		:=	./bonus/obj/
+OBJ_DIR_B		:=	./bonus/.obj/
 
-SRC_FILES		:=	$(addsuffix .c, pipex)
+SRC_FILES		:=	$(addsuffix .c, pipex pipex_util)
 OBJ_FILES		:=	$(SRC_FILES:.c=.o)
 SRC				:=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ				:=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))

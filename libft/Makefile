@@ -6,7 +6,7 @@
 #    By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 00:50:10 by hmoon             #+#    #+#              #
-#    Updated: 2022/04/30 11:21:55 by hmoon            ###   ########.fr        #
+#    Updated: 2022/05/04 07:02:38 by hmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		:=	libft.a
 CFLAGS		:=	-Wall -Wextra -Werror
 
 SRC_DIR		:=	./src/
-OBJ_DIR		:=	./obj/
+OBJ_DIR		:=	./.obj/
 INCLUDE		:=	./include/
 
 SRC_FILE	:=	ft_atoi.c \

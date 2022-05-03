@@ -5,148 +5,52 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmoon <hmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/15 10:57:44 by hmoon             #+#    #+#             */
-/*   Updated: 2022/05/01 14:31:23 by hmoon            ###   ########.fr       */
+/*   Created: 2022/04/30 09:10:11 by hmoon             #+#    #+#             */
+/*   Updated: 2022/05/04 07:12:45 by hmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
-#include <fcntl.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <errno.h>
-#include <string.h>
 
-// static int	get_exit_status(int status)
-// {
-// 	if (ft_wifexited(status))
-// 		return (ft_wexitstatus(status));
-// 	if (ft_wifsignaled(status))
-// 		return (ft_wtermsig(status) + EXIT_SIGNAL);
-// 	if (ft_wifstopped(status))
-// 		return (STOP_SIGNAL + EXIT_SIGNAL);
-// 	return (CONTINUE_SIGNAL + EXIT_SIGNAL);
-// }
-
-static void	putstr_error(char *str, char *argv, int exit_status)
+static void	close_out(t_info *info)
 {
-	ft_putstr_fd(str, STDERR_FILENO);
-	if (argv)
+	ft_dup2(info->outfile, STDOUT_FILENO);
+	ft_close(info->outfile);
+}
+
+static void	open_in_out(t_info *info, int ac, char **av)
+{
+	info->outfile = ft_open(av[ac - 1], WRITE);
+	info->infile = ft_open(av[info->index], READ);
+	if (info->infile != -1)
 	{
-		if (exit_status != EXIT_NOT_COMMAND)
-		{
-			ft_putstr_fd(": ", STDERR_FILENO);
-			ft_putstr_fd(strerror(errno), STDERR_FILENO);
-			ft_putstr_fd(": ", STDERR_FILENO);
-		}
-		ft_putstr_fd(argv, STDERR_FILENO);
-		ft_putstr_fd("\n", STDERR_FILENO);
+		ft_dup2(info->infile, STDIN_FILENO);
+		ft_close(info->infile);
 	}
-	exit(exit_status);
 }
 
-static char **get_path(char **envp)
+static void	init_info(t_info *info)
 {
-	size_t	index;
-
-	index = 0;
-	if (!(*envp))
-		return (0);
-		// putstr_error("Error : No Path\n", NULL, EXIT_);
-	while (*envp && (ft_strnstr(envp[index], "PATH", 4) == 0))
-		++index;
-	if (envp[index] == 0)
-		return (0);
-	return (ft_split(envp[index] + 5, ':'));
-}
-
-static char	*cmd_parse(char *cmd, char **paths)
-{
-	char	*temp;
-	char	*path;
-	int		err;
-	size_t	index;
-
-	index = -1;
-	temp = ft_strjoin("/", cmd);
-	while (paths[++index] != 0)
-	{
-		path = ft_strjoin(paths[index], temp);
-		err = access(path, X_OK);
-		if (err == 0)
-		{
-			free(temp);
-			return (path);
-		}
-		free(path);
-	}
-	free(temp);
-	err = access(cmd, X_OK);
-	if (err == 0)
-		return (cmd);
-	putstr_error("Error: command not found: ", cmd, EXIT_NOT_COMMAND);
-	return (NULL);
-}
-
-static void	command_excute(char *argv, char **envp)
-{
-	char	**cmd;
-	char	**paths;
-	char	*path;
-
-	cmd = ft_split(argv, ' ');
-	if (cmd == 0)
-		putstr_error("Error: Bad cmd split\n", NULL, EXIT_FAILURE);
-	paths = get_path(envp);
-	if (paths == 0 && access(cmd[0], X_OK) == -1)
-		putstr_error("Error: command not found: ", cmd[0], EXIT_NOT_COMMAND);
-	path = cmd_parse(cmd[0], paths);
-	if (execve(path, cmd, envp) == -1)
-		exit(EXIT_NOT_EXECUTE);
-}
-
-static void parent_process(pid_t pid, int fd[2], char **argv, char **envp)
-{
-	int	outfile;
-	int	status;
-
-	ft_close(fd[1]);
-	ft_waitpid(pid, &status, 0);
-	outfile = open(argv[4], WRITE);
-	ft_dup2(fd[0], STDIN_FILENO);
-	ft_dup2(outfile, STDOUT_FILENO);
-	ft_close(fd[0]);
-	ft_close(outfile);
-	command_excute(argv[3], envp);
-}
-
-static void	child_process(int fd[2], char **argv, char **envp)
-{
-	int		infile;
-
-	ft_close(fd[0]);
-	infile = ft_open(argv[1], READ);
-	ft_dup2(infile, STDIN_FILENO);
-	ft_close(infile);
-	ft_dup2(fd[1], STDOUT_FILENO);
-	ft_close(fd[1]);
-	command_excute(argv[2], envp);
+	info->index = 1;
+	info->infile = -1;
+	info->outfile = -1;
+	info->pipe[0] = -1;
+	info->pipe[1] = -1;
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	int		fd[2];
-	pid_t	pid;
+	t_info	info;
 
-	if (argc != 5)
+	if (argc < 5)
 		putstr_error("Error: Bad argument\n", NULL, EXIT_FAILURE);
-	//while4
-	ft_pipe(fd);
-	pid = ft_fork();
-	if (pid == 0)
-		child_process(fd, argv, envp);
-	else
-		parent_process(pid, fd, argv, envp);
-	//
+	init_info(&info);
+	open_in_out(&info, argc, argv);
+	while (++info.index < argc - 2)
+		make_process(&info, argv[info.index], envp);
+	close_out(&info);
+	command_excute(argv[argc - 2], envp);
 	return (0);
 }

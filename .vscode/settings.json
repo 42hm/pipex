@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"*.html": "html",
-		"libft.h": "c",
-		"errno.h": "c",
-		"locale": "c",
-		"sstream": "c"
-	}
-}
